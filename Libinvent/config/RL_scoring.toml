@@ -1,0 +1,55 @@
+[[component]]
+[component.custom_alerts]
+[[component.custom_alerts.endpoint]]
+name = "Unwanted SMARTS"  # user chosen name for output
+weight = 0.8  # weight to fine-tune the relevance of this component
+
+params.smarts = [
+    "[*;r8]",
+    "[*;r9]",
+    "[*;r10]",
+    "[*;r11]",
+    "[*;r12]",
+    "[*;r13]",
+    "[*;r14]",
+    "[*;r15]",
+    "[*;r16]",
+    "[*;r17]",
+    "[#8][#8]",
+    "[#6;+]",
+    "[#16][#16]",
+    "[#7;!n][S;!$(S(=O)=O)]",
+    "[#7;!n][#7;!n]",
+    "C(=[O,S])[O,S]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#7;!n]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#8]-[#6]-[#8]"
+]
+
+[[component]]
+[component.Qptuna]
+[[component.Qptuna.endpoint]]
+name = "GPmodel_pIC50"
+weight = 0.5
+params.model_file = "../models/JNK1_PIC50.pkl"
+transform.type = "sigmoid"
+transform.high = 8.0
+transform.low = 6.0
+transform.k = 0.5
+
+[[component]]
+[component.MolecularWeight]
+
+[[component.MolecularWeight.endpoint]]
+name = "Molecular weight"  # user chosen name for output
+weight = 0.3  
+transform.type = "double_sigmoid"
+transform.high = 600.0
+transform.low = 200.0
+transform.coef_div = 550.0
+transform.coef_si = 20.0
+transform.coef_se = 20.0

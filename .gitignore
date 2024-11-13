@@ -1,0 +1,2 @@
+Libinvent/models/checkpoint_*.chkpt
+Libinvent/outputs/tb_logs_*/

@@ -1,0 +1,22 @@
+# REINVENT4 TOML input example for sampling
+    #
+
+
+    run_type = "sampling"
+    device = "cuda:0"  # set torch device e.g. "cpu"
+    json_out_config = "./_sampling.json"  # write this TOML to JSON
+
+
+    [parameters]
+
+    ## LibInvent: find R-groups for the given scaffolds
+    model_file = "../models/checkpoint_4.chkpt"
+    smiles_file = "../config/scaffolds_pmx.smi"  # 1 scaffold per line with attachment points
+
+    output_file = '../outputs/checkpoint_4.csv'  # sampled SMILES and NLL in CSV format
+
+    num_smiles = 2000  # number of SMILES to be sampled, 1 per input SMILES
+    unique_molecules = false  # if true remove all duplicatesd canonicalize smiles
+    randomize_smiles = false # if true shuffle atoms in SMILES randomly
+
+    
